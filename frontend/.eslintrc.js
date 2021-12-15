@@ -1,3 +1,4 @@
+// eslint-disable-next-line no-undef
 module.exports = {
 	env: {
 		browser: true,
@@ -12,7 +13,7 @@ module.exports = {
 		ecmaVersion: 12,
 		sourceType: "module",
 	},
-	plugins: ["react", "jest", "cypress"],
+	plugins: ["react", "cypress"],
 	rules: {
 		indent: ["error", "tab"],
 		"linebreak-style": ["error", "unix"],
