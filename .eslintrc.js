@@ -2,6 +2,7 @@
 module.exports = {
 	env: {
 		browser: true,
+		node: true,
 		es2021: true,
 		"cypress/globals": true,
 	},
@@ -15,8 +16,7 @@ module.exports = {
 	},
 	plugins: ["react", "cypress"],
 	rules: {
-		indent: ["error", "tab"],
-		"linebreak-style": ["error", "unix"],
+		indent: ["error", "tab"], "linebreak-style": ["error", "unix"],
 		quotes: ["error", "double"],
 		semi: ["error", "always"],
 	},
