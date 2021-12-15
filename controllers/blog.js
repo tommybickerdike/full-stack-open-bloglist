@@ -53,7 +53,7 @@ blogsRouter.get("/:id", async (request, response) => {
 });
 
 blogsRouter.delete("/:id", async (request, response) => {
-	blogToDelete = await Blog.findById(request.params.id);
+	const blogToDelete = await Blog.findById(request.params.id);
 
 	if (!blogToDelete) {
 		return response.status(404).json({ error: "blog not found" }).end();
