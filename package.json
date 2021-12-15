@@ -27,15 +27,17 @@
 	"scripts": {
 		"start": "concurrently --kill-others-on-fail \"npm run api:prod\" \"npm run frontend\"",
 		"dev": "concurrently --kill-others-on-fail \"npm run api:dev\" \"npm run frontend\"",
-		"test": "NODE_ENV=test jest --verbose --runInBand",
 		"build": "concurrently --kill-others-on-fail \"npm run api:build\" \"npm run frontend:build\"",
+		"test": "concurrently --kill-others-on-fail \"npm run api:test\" \"npm run frontend:test\"",
 		"frontend": "cd frontend && npm run start",
 		"frontend:build": "cd frontend && npm run build",
+		"frontend:test": "npm run api:start:test && npm run frontend && cd frontend && cypress run",
 		"api:prod": "NODE_ENV=production node index.js",
+		"api:start:test": "NODE_ENV=test node index.js",
 		"api:dev": "NODE_ENV=development nodemon index.js",
 		"api:build": "NODE_ENV=production react-scripts build",
+		"api:test": "NODE_ENV=test jest --verbose --runInBand",
 		"eject": "react-scripts eject",
-		"start:test": "NODE_ENV=test node index.js",
 		"heroku-postbuild": "cd frontend && npm install && npm run build"
 	},
 	"browserslist": {
@@ -48,6 +50,12 @@
 			"last 1 chrome version",
 			"last 1 firefox version",
 			"last 1 safari version"
+		]
+	},
+	"eslintConfig": {
+		"extends": [
+			"react-app",
+			"react-app/jest"
 		]
 	},
 	"devDependencies": {
