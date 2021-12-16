@@ -2,6 +2,7 @@
 	"name": "blog-list",
 	"version": "0.1.0",
 	"private": true,
+	"homepage": ".",
 	"dependencies": {
 		"@testing-library/jest-dom": "^5.11.4",
 		"@testing-library/react": "^11.1.0",
@@ -27,13 +28,12 @@
 	"scripts": {
 		"start": "concurrently --kill-others-on-fail \"npm run api:prod\" \"npm run frontend\"",
 		"dev": "concurrently --kill-others-on-fail \"npm run api:dev\" \"npm run frontend\"",
-		"build": "NODE_ENV=production react-scripts build",
+		"build": "cd frontend && npm run build",
 		"test": "NODE_ENV=test jest --verbose --runInBand",
 		"lint": "eslint .",
 		"frontend": "cd frontend && npm run start",
-		"frontend:build": "cd frontend && npm run build",
 		"frontend:test-env": "concurrently --kill-others-on-fail \"npm run api:start:test\" \"npm run frontend\"",
-		"frontend:install": "cd frontend && npm install",
+		"postinstall": "cd frontend && npm install",
 		"frontend:test": "cd frontend && npm run test",
 		"api:prod": "NODE_ENV=production node index.js",
 		"api:start:test": "NODE_ENV=test node index.js",

@@ -18,13 +18,9 @@ jobs:
           node-version: "12.x"
       - name: install
         run: npm install
-      - name: frontend install
-        run: npm run frontend:install
       - name: lint
         run: npm run lint
       - name: build
-        run: npm run build
-      - name: frontend build
         run: npm run build
       - name: backend test
         run: npm run test
