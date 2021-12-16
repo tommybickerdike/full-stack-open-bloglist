@@ -24,17 +24,16 @@ jobs:
         run: npm run build
       - name: e2e test
         uses: cypress-io/github-action@v2
-        env:
-          TEST_MONGODB_URI: ${{ secrets.TEST_MONGODB_URI }}
-          PORT: 3003
-          SECRET: ${{ secrets.SECRET }}
         with:
           start: |
               npm run api:start:test
               npm run frontend
               npm run frontend:test
-          config: 'baseUrl=http://localhost:3000'
-          wait-on: 'http://localhost:3000, http://localhost:3003'
+          wait-on: http://localhost:3003
+        env:
+          TEST_MONGODB_URI: ${{ secrets.TEST_MONGODB_URI }}
+          PORT: 3003
+          SECRET: ${{ secrets.SECRET }}
       - name: deploy  
         uses: akhileshns/heroku-deploy@v3.12.12
         if: ${{ github.event_name == 'push' }}
