@@ -27,7 +27,7 @@
 	"scripts": {
 		"start": "concurrently --kill-others-on-fail \"npm run api:prod\" \"npm run frontend\"",
 		"dev": "concurrently --kill-others-on-fail \"npm run api:dev\" \"npm run frontend\"",
-		"build": "concurrently --kill-others-on-fail \"npm run api:build\" \"npm run frontend:build\"",
+		"build": "NODE_ENV=production react-scripts build",
 		"test": "NODE_ENV=test jest --verbose --runInBand",
 		"lint": "eslint .",
 		"frontend": "cd frontend && npm run start",
@@ -38,7 +38,6 @@
 		"api:prod": "NODE_ENV=production node index.js",
 		"api:start:test": "NODE_ENV=test node index.js",
 		"api:dev": "NODE_ENV=development nodemon index.js",
-		"api:build": "NODE_ENV=production react-scripts build",
 		"eject": "react-scripts eject",
 		"heroku-postbuild": "cd frontend && npm install && npm run build"
 	},
