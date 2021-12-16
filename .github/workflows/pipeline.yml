@@ -27,7 +27,7 @@ jobs:
         with:
           command: npm run frontend:test
           start: npm run frontend:test-env
-          wait-on: http://localhost:3000
+          wait-on: 'http://localhost:3000, http://localhost:3003'
       - name: deploy  
         uses: akhileshns/heroku-deploy@v3.12.12
         if: ${{ github.event_name == 'push' }}
