@@ -25,8 +25,11 @@ jobs:
       - name: e2e test
         uses: cypress-io/github-action@v2
         with:
-          command: npm run frontend:test
-          start: npm run frontend:test-env
+          build: npm run build
+          start: |
+              npm run frontend:test-env
+              npm run frontend:test
+          config: 'baseUrl=http://localhost:3000'
           wait-on: 'http://localhost:3000, http://localhost:3003'
       - name: deploy  
         uses: akhileshns/heroku-deploy@v3.12.12
