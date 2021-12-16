@@ -10,7 +10,8 @@ node_modules
 # testing
 /coverage
 coverage
-/cypress/videos
+cypress/videos
+cypress/screenshots
 
 # production
 /build
@@ -29,3 +30,4 @@ yarn-debug.log*
 yarn-error.log*
 robots.txt
 .eslintcache
+
