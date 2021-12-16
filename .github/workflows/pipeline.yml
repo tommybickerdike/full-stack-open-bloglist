@@ -30,9 +30,7 @@ jobs:
         uses: cypress-io/github-action@v2
         with:
           command: npm run frontend:test
-          start: |
-              npm run api:start:test
-              npm run frontend
+          start: npm run test:env
           wait-on: http://localhost:3003
       - name: deploy  
         uses: akhileshns/heroku-deploy@v3.12.12
