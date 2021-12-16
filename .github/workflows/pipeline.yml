@@ -25,10 +25,9 @@ jobs:
       - name: e2e test
         uses: cypress-io/github-action@v2
         with:
-          build: npm run build
           start: |
-              npm run frontend
               npm run api:start:test
+              npm run frontend
               npm run frontend:test
           config: 'baseUrl=http://localhost:3000'
           wait-on: 'http://localhost:3000, http://localhost:3003'
