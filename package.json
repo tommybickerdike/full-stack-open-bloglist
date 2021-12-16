@@ -37,7 +37,7 @@
 		"postinstall": "cd frontend && npm install",
 		"frontend:test": "cypress run",
 		"api:prod": "NODE_ENV=production node index.js",
-		"api:dev": "NODE_ENV=development nodemon index.js",
+		"api:dev": "cross-env NODE_ENV=development nodemon index.js",
 		"eject": "react-scripts eject",
 		"heroku-postbuild": "cd frontend && npm install && npm run build"
 	},

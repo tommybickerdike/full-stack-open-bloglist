@@ -45,7 +45,7 @@ describe("Blog app", function () {
 		beforeEach(function () {
 			cy.request("POST", "http://localhost:3003/api/login", {
 				username: "mluukkai",
-				password: "salainen",
+				password: "salainen"
 			}).then((response) => {
 				localStorage.setItem("user", JSON.stringify(response.body));
 				cy.visit("http://localhost:3000");
