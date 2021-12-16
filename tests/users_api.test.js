@@ -20,7 +20,7 @@ describe("general user api calls", () => {
 			.get("/api/users")
 			.expect(200)
 			.expect("Content-Type", /application\/json/);
-	}, 1500);
+	}, 8000);
 
 	test("can create a user", async () => {
 		const newUser = {
@@ -54,7 +54,7 @@ describe("general user api calls", () => {
 		await api.post("/api/users").send(repeatUser).expect(400);
 		const usersAtEnd = await helper.usersInDb();
 		expect(usersAtEnd).toHaveLength(helper.initialUsers.length);
-	});
+	}, 8000);
 });
 
 afterAll(() => {
