@@ -34,7 +34,7 @@ Toggle.displayName = "Toggle";
 
 Toggle.propTypes = {
 	buttonLabel: PropTypes.string.isRequired,
-	children: PropTypes.array.isRequired,
+	children: PropTypes.object.isRequired,
 };
 
 export default Toggle;

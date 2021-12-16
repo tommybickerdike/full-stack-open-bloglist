@@ -35,7 +35,7 @@ const Notification = ({ notification, setNotification }) => {
 };
 
 Notification.propTypes = {
-	notification: PropTypes.object.isRequired,
+	notification: PropTypes.object,
 	setNotification: PropTypes.func.isRequired,
 };
 
