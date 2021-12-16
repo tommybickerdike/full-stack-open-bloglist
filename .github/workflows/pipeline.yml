@@ -27,6 +27,7 @@ jobs:
         env:
           TEST_MONGODB_URI: ${{ secrets.TEST_MONGODB_URI }}
           PORT: 3003
+          SECRET: ${{ secrets.SECRET }}
         with:
           start: |
               npm run api:start:test
