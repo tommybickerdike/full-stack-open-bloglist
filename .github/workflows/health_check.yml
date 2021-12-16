@@ -1,0 +1,14 @@
+name: Health Check
+
+on:
+  schedule:
+    - cron:  '15 8 * * *'
+
+jobs:
+  health_check:
+    runs-on: ubuntu-18.04
+    steps:
+      - name: Good Health PING
+        uses: jtalk/url-health-check-action@v2
+        with:
+          url: https://morning-cove-40112.herokuapp.com/health
