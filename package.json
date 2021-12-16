@@ -33,6 +33,7 @@
 		"frontend": "cd frontend && npm run start",
 		"frontend:build": "cd frontend && npm run build",
 		"frontend:test-env": "concurrently --kill-others-on-fail \"npm run api:start:test\" \"npm run frontend\"",
+		"frontend:install": "cd frontend && npm install",
 		"frontend:test": "cd frontend && npm run test",
 		"api:prod": "NODE_ENV=production node index.js",
 		"api:start:test": "NODE_ENV=test node index.js",
