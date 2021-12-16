@@ -68,8 +68,8 @@ describe("Blog app", function () {
 
 			it("blog can be liked", function () {
 				cy.contains("View").click();
-				cy.contains("Like").click().click();
-				cy.get(".blog__toggle-content").should("contain", "Likes 2");
+				cy.contains("Like").click();
+				cy.get(".blog__toggle-content").should("contain", "Likes 1");
 			});
 
 			it("blog can be deleted", function () {
@@ -106,8 +106,7 @@ describe("Blog app", function () {
 			it("blog can be liked", function () {
 				cy.contains("View").click();
 				cy.contains("Like").click();
-				cy.contains("Like").click();
-				cy.get(".blog__toggle-content").should("contain", "Likes 2");
+				cy.get(".blog__toggle-content").should("contain", "Likes 1");
 			});
 
 			it("blog cannot be deleted", function () {
