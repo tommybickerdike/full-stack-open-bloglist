@@ -8,7 +8,7 @@ describe("Blog app", function () {
 			password: "salainen",
 		};
 		cy.request("POST", "http://localhost:3003/api/users/", user);
-		cy.visit("http://localhost:3000");
+		cy.visit("http://localhost:3003");
 	});
 
 	it("Login form is shown", function () {
@@ -48,7 +48,7 @@ describe("Blog app", function () {
 				password: "salainen"
 			}).then((response) => {
 				localStorage.setItem("user", JSON.stringify(response.body));
-				cy.visit("http://localhost:3000");
+				cy.visit("http://localhost:3003");
 			});
 		});
 
@@ -67,7 +67,7 @@ describe("Blog app", function () {
 			});
 
 			it("blog can be deleted", function () {
-				cy.visit("http://localhost:3000");
+				cy.visit("http://localhost:3003");
 				cy.contains("View").click();
 				cy.contains("remove").click();
 			});
@@ -87,13 +87,13 @@ describe("Blog app", function () {
 					password: "else",
 				};
 				cy.request("POST", "http://localhost:3003/api/users/", user);
-				cy.visit("http://localhost:3000");
+				cy.visit("http://localhost:3003");
 				cy.request("POST", "http://localhost:3003/api/login", {
 					username: "someone",
 					password: "else",
 				}).then((response) => {
 					window.localStorage.setItem("user", JSON.stringify(response.body));
-					cy.visit("http://localhost:3000");
+					cy.visit("http://localhost:3003");
 				});
 			});
 
