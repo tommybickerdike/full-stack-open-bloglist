@@ -29,16 +29,11 @@ const App = ({ user }) => {
 			<CssBaseline />
 			<Notification />
 			{user === null ? (
-				<Switch>
-					<Route path="/health">
-						ok
-					</Route>
-					<Route path="/">
-						<Toggle buttonLabel="Login">
-							<LoginForm />
-						</Toggle>
-					</Route>
-				</Switch>
+				<Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
+					<Toggle buttonLabel="Login">
+						<LoginForm />
+					</Toggle>
+				</Container>
 			) : (
 				<main>
 					<Navigation />
