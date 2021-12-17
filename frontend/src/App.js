@@ -1,74 +1,85 @@
-import React, { useState, useEffect, useRef } from "react";
-import Blog from "./components/Blog";
+import React, { useEffect } from "react";
+import { connect, useDispatch } from "react-redux";
+import BlogList from "./routes/BlogList";
+import UserList from "./routes/UserList";
+import User from "./routes/User";
+import Blog from "./routes/Blog";
 import LoginForm from "./components/LoginForm";
-import AddBlogForm from "./components/AddBlogForm";
 import Notification from "./components/Notification";
-import UserInfo from "./components/UserInfo";
+import Navigation from "./components/Navigation";
 import Toggle from "./components/Toggle";
-import blogService from "./services/blogs";
-import userService from "./services/user";
+import PropTypes from "prop-types";
+import { initialize as initUser } from "./reducers/userReducer";
+import { Switch, Route } from "react-router-dom";
+import { createTheme, ThemeProvider } from "@mui/material/styles";
+import Container from "@mui/material/Container";
+import CssBaseline from "@mui/material/CssBaseline";
 
-const App = () => {
-	const [user, setUser] = useState(null);
-	const [blogs, setBlogs] = useState([]);
-	const [notification, setNotification] = useState(null);
-	const blogFormRef = useRef();
-
-	const sortedByLike = blogs.sort(function (a, b) {
-		if (a.likes < b.likes) {
-			return 1;
-		}
-		if (a.likes > b.likes) {
-			return -1;
-		}
-		return 0;
-	});
+const App = ({ user }) => {
+	const dispatch = useDispatch();
 
 	useEffect(() => {
-		blogService.getAll().then((blogs) => setBlogs(blogs));
-		userService.getUser().then((user) => setUser(user));
-	}, []);
+		dispatch(initUser());
+	}, [dispatch]);
+
+	const theme = createTheme();
 
 	return (
-		<main>
-			<Notification
-				notification={notification}
-				setNotification={setNotification}
-			/>
+		<ThemeProvider theme={theme}>
+			<CssBaseline />
+			<Notification />
 			{user === null ? (
-				<Toggle buttonLabel="Login">
-					<LoginForm setUser={setUser} setNotification={setNotification} />
-				</Toggle>
+				<Switch>
+					<Route path="/health">
+						ok
+					</Route>
+					<Route path="/">
+						<Toggle buttonLabel="Login">
+							<LoginForm />
+						</Toggle>
+					</Route>
+				</Switch>
 			) : (
-				<div>
-					<h2>blogs</h2>
-					<UserInfo
-						user={user}
-						setUser={setUser}
-						setNotification={setNotification}
-					/>
-					<Toggle buttonLabel="Create new blog" ref={blogFormRef}>
-						<AddBlogForm
-							toggleRef={blogFormRef}
-							blogs={blogs}
-							setBlogs={setBlogs}
-							setNotification={setNotification}
-						/>
-					</Toggle>
-					<div id="blogs">
-						{sortedByLike.map((blog) => (
-							<Blog
-								key={blog.id}
-								blog={blog}
-								setNotification={setNotification}
-								user={user}
-							/>
-						))}
-					</div>
-				</div>
+				<main>
+					<Navigation />
+					<Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
+						<h2>blogs</h2>
+						<Switch>
+							<Route path="/user/:slug">
+								<User />
+							</Route>
+							<Route path="/users">
+								<UserList />
+							</Route>
+							<Route path="/blog/:slug">
+								<Blog />
+							</Route>
+							<Route path="/">
+								<BlogList />
+							</Route>
+						</Switch>
+					</Container>
+				</main>
 			)}
-		</main>
+		</ThemeProvider>
 	);
 };
 
-export default App;
+App.propTypes = {
+	user: PropTypes.string,
+};
+
+const mapDispatchToProps = (dispatch) => {
+	return {
+		initUser: (user) => {
+			dispatch(initUser(user));
+		},
+	};
+};
+const mapStateToProps = (state) => {
+	return {
+		user: state.user,
+	};
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);

@@ -64,11 +64,30 @@ const remove = async (blog) => {
 	}
 };
 
+const comment = async (blog, comment) => {
+	const user = JSON.parse(window.localStorage.getItem("user"));
+	const commentUrl = `${baseUrl}/${blog.id}/comments`;
+
+	const data = {
+		comment: comment,
+	};
+
+	const headers = { Authorization: `bearer ${user.token}` };
+	const response = await axios.post(commentUrl, data, { headers: headers });
+
+	try {
+		return response.data;
+	} catch {
+		return response.data;
+	}
+};
+
 const exports = {
 	getAll,
 	addNew,
 	like,
 	remove,
+	comment,
 };
 
 export default exports;
