@@ -1,1 +1,1 @@
-web: cross-env NODE_ENV=production node index.js & npm start
+web: npm start
