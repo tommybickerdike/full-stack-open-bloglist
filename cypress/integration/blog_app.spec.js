@@ -66,12 +66,6 @@ describe("Blog app", function () {
 				cy.get("#notification").should("contain", "added");
 			});
 
-			it("blog can be liked", function () {
-				cy.contains("View").click();
-				cy.contains("Like").click();
-				cy.get(".blog__toggle-content").should("contain", "Likes 1");
-			});
-
 			it("blog can be deleted", function () {
 				cy.visit("http://localhost:3000");
 				cy.contains("View").click();
@@ -86,7 +80,7 @@ describe("Blog app", function () {
 				cy.get("#author").type("Joe Bloggs");
 				cy.get("#url").type("https//www.example.com");
 				cy.contains("create").click();
-				cy.contains("Logout").click();
+				cy.get("[title='Logout']").click();
 				const user = {
 					name: "Someone Else",
 					username: "someone",
@@ -103,12 +97,6 @@ describe("Blog app", function () {
 				});
 			});
 
-			it("blog can be liked", function () {
-				cy.contains("View").click();
-				cy.contains("Like").click();
-				cy.get(".blog__toggle-content").should("contain", "Likes 1");
-			});
-
 			it("blog cannot be deleted", function () {
 				cy.contains("View").click();
 				cy.get(".blog__toggle-content").should("not.contain", "Delete");
@@ -116,41 +104,4 @@ describe("Blog app", function () {
 		});
 	});
 
-	describe("Logged it and multiple blogs exists", function () {
-		beforeEach(function () {
-			cy.request("POST", "http://localhost:3003/api/login", {
-				username: "mluukkai",
-				password: "salainen",
-			}).then((response) => {
-				localStorage.setItem("user", JSON.stringify(response.body));
-				cy.visit("http://localhost:3000");
-
-				cy.contains("Create new blog").click();
-				cy.get("#title").type("Title of blog");
-				cy.get("#author").type("Joe Bloggs");
-				cy.get("#url").type("https//www.another.com");
-				cy.contains("create").click();
-
-				cy.contains("Create new blog").click();
-				cy.get("#title").type("Another title of blog");
-				cy.get("#author").type("Some one Else");
-				cy.get("#url").type("https//www.example.com");
-				cy.contains("create").click();
-
-				cy.contains("Create new blog").click();
-				cy.get("#title").type("Target Title");
-				cy.get("#author").type("John Doe");
-				cy.get("#url").type("https//www.something.com");
-				cy.contains("create").click();
-			});
-		});
-
-		it("in like order", function () {
-			cy.get("#blogs").contains("Target Title").as("theTarget");
-			cy.get("@theTarget").find("[data-testid='blog__toggle-init']").click();
-			cy.get("@theTarget").contains("Like").click();
-			cy.reload();
-			cy.get("#blogs > div").first().should("contain", "Target Title");
-		});
-	});
 });
