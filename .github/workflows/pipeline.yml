@@ -41,9 +41,9 @@ jobs:
           heroku_api_key: ${{secrets.HEROKU_API_TOKEN}}
           heroku_app_name: "morning-cove-40112"
           heroku_email: "btommyb@gmail.com"
-          healthcheck: "https://morning-cove-40112.herokuapp.com/health"
-          checkstring: "ok"
-          rollbackonhealthcheckfailed: true
+          # healthcheck: "https://morning-cove-40112.herokuapp.com/health"
+          # checkstring: "ok"
+          # rollbackonhealthcheckfailed: true
       - uses: actions/checkout@v2
       - name: Bump version and push tag
         env:
